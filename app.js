@@ -16,7 +16,15 @@ app.use(express.json());
 
 // Define HTTP routes listenting for requests
 app.get("/api", async (req,res) => {
-  res.send(await fm.ReadData(req));
+  // try {
+  //   const task = await tasks.find(); 
+  //   res.status(200).json({task});
+  // } catch (error) {
+  //   console.log(error)
+  //   res.status(500).json({msg: error});
+  // };
+
+  res.send(await tasks.find());
 })
 
 app.post("/api", async (req,res) => {

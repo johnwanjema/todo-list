@@ -23,8 +23,7 @@ function capitalizeFirstLetter(string) {
 function ShowList() {
   let output = "<ul>";
   theList.forEach((item, index) => {
-    const capitalizedItem = capitalizeFirstLetter(item);
-    output += `<li>${capitalizedItem} <button class="del-item-btn small-button" data-index="${index}">Delete</button></li>`;
+    output += `<li>${item.name}  ${item.completed} <button class="del-item-btn small-button" data-index="${index}">Delete</button></li>`;
   });
   output += "</ul>";
   result.innerHTML = output;
@@ -39,6 +38,7 @@ function ShowList() {
 async function GetList() {
     http.get('/api')
     .then( (response)=> {
+      console.log(response);
       theList = response;
       ShowList();
     })
