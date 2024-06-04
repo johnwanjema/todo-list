@@ -68,11 +68,11 @@ async function httpPost(e) {
   console.log(taskStatus.value);
   // send to Mongo DB
 
-  // Todo : move to writeList
-
   http.post('/api',{name:taskname.value,completed:taskStatus.value})
   .then( (response)=> {
-    console.log(response)
+    console.log(response);
+    alert('Task added succesfully');
+    window.location = "/"
   })
   .catch((error) => {
     console.log(error)

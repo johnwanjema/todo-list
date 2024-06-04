@@ -28,14 +28,7 @@ app.get("/api", async (req,res) => {
 })
 
 app.post("/api", async (req,res) => {
-  console.log(req.body)
-  tasks.create(req.body) .then(result => { 
-    console.log(result) 
-  }).catch(e => {
-    console.log(e)
-  })
-
-  // res.send(await fm.WriteData(req.body));
+  res.send(await tasks.create(req.body));
 })
 
 app.get("/add", (req, res) => {
