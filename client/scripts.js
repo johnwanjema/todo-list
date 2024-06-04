@@ -24,8 +24,8 @@ function ShowList() {
   let output = "<ul>";
   theList.forEach((item, index) => {
     output += `<li>${item.name}  ${item.completed} 
-      <button class="del-item-btn small-button" data-index="${item.id}">Edit</button>
-      <button class="del-item-btn small-button" data-index="${item.id}">Delete</button>
+      <button class="del-item-btn small-button" data-index="${item._id}">Edit</button>
+      <button class="del-item-btn small-button" data-index="${item._id}">Delete</button>
     </li>`;
   });
   output += "</ul>";
@@ -85,17 +85,24 @@ function httpDelete(e) {
 
   // Confirmation for delete
   if (!confirm("Are you sure you want to delete this item?")) {
+    ShowList();
     return; // Exit if user cancels the delete action
   }
 
-  if(index != -1){
-      theList.splice(index,1)
-  }else{
-    alert('element not found')
-  }
-  WriteList();
   ShowList();
-  input.value = ""
+
+  console.log(index);
+
+  http.delete('/api',{id :index})
+  .then( (response)=> {
+    alert('Task Deleted Sucessfully');
+    GetList();
+  })
+  .catch((error) => {
+    console.log(error)
+  });
+
+  ShowList();
 }
 
 // Loading functions

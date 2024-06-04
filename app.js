@@ -31,6 +31,11 @@ app.post("/api", async (req,res) => {
   res.send(await tasks.create(req.body));
 })
 
+app.delete("/api", async (req,res) => {
+  console.log(req.body.id)
+  res.send(await tasks.findByIdAndDelete(req.body.id));
+})
+
 app.get("/add", (req, res) => {
   res.sendFile(path.join(__dirname, 'Client', 'addTask.html'));
 });
