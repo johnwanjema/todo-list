@@ -23,7 +23,10 @@ function capitalizeFirstLetter(string) {
 function ShowList() {
   let output = "<ul>";
   theList.forEach((item, index) => {
-    output += `<li>${item.name}  ${item.completed} <button class="del-item-btn small-button" data-index="${index}">Delete</button></li>`;
+    output += `<li>${item.name}  ${item.completed} 
+      <button class="del-item-btn small-button" data-index="${item.id}">Edit</button>
+      <button class="del-item-btn small-button" data-index="${item.id}">Delete</button>
+    </li>`;
   });
   output += "</ul>";
   result.innerHTML = output;
