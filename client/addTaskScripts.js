@@ -4,9 +4,10 @@ const http = new coreHTTP;
 let theList = [];
 
 // setup selectors
-const result = document.querySelector(".result");
-const input =  document.querySelector("#listitem");
 const addButton =  document.querySelector(".add-btn");
+const taskname =  document.querySelector("#name");
+const taskStatus =  document.querySelector("#taskStatus");
+
 // const delButton =  document.querySelector(".del-btn");
 
 // Listeners
@@ -59,20 +60,24 @@ async function WriteList() {
 
 /* Listener Functions */
 async function httpPost(e) {
-  showLoading();
+
   e.preventDefault();
   
-  // Validation for blank input
-  if (!input.value.trim()) {
-    alert("Input cannot be blank!");
-    ShowList();
-    return;
-  }
+  // Todo : Validation 
+  console.log(taskname.value);
+  console.log(taskStatus.value);
+  // send to Mongo DB
 
-  theList.push(input.value);
-  WriteList();
-  ShowList();
-  input.value = "";
+  // Todo : move to writeList
+
+  http.post('/api',{name:taskname.value,completed:taskStatus.value})
+  .then( (response)=> {
+    console.log(response)
+  })
+  .catch((error) => {
+    console.log(error)
+  });
+
 }
 
 function httpDelete(e) {
@@ -103,16 +108,11 @@ function showLoading() {
 async function main() {
   if (addButton) {
   addButton.disabled = true;
-
     addButton.addEventListener("click", httpPost);
   }
-  // delButton.disabled = true;
-  showLoading();
 
-  await GetList();
 
   addButton.disabled = false;
-  // delButton.disabled = false;
 }
 
 main();

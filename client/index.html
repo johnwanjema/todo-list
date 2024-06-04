@@ -5,23 +5,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="csc3221.css">
-  <title>Simple List</title>
+  <title>Todo List</title>
 </head>
 <body>
   <div class="page-area">
-    <h1>Simple List</h1>
-    <form>
-      <h3>On my list</h3>
-      <section>
-        <input type="text"
-        name="listitem"
-        id="listitem"
-        autocomplete="false"
-        />
-      </section>
-      <button type="submit" class="add-btn">Add</button>
-      <button type="submit" class="del-btn">Delete</button>
-    </form>
+    <h1>Todo List</h1>
+    <section style="display: flex; align-items: center;"> 
+      <h3>My Tasks</h3>
+      <a href="/add">
+        <button>Add new Task</button>
+    </a>
+    </section>
     <div class="result"></div>
   </div>
   <script src="corehttp.js"></script>
