@@ -1,40 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/csc3221.css" />
-    <title>Todo List</title>
-  </head>
-  <body>
-    <div class="page-area">
-      <h1>Todo List</h1>
-      <form>
-        <h3>Edit Task</h3>
-        <section>
-          <label>Name</label>
-          <input
-            type="text"
-            placeholder="Input Name"
-            name="Name"
-            id="name"
-            autocomplete="false"
-          />
-        </section>
-        <section>
-          <label for="status">Choose a Status:</label>
-          <select name="status" id="completed">
-            <option value="true">Active</option>
-            <option value="false">Inactive</option>
-          </select>
-        </section>
-        <button type="submit" class="edit-btn">Edit</button>
-      </form>
-    </div>
-    <script src="/corehttp.js"></script>
-    <script src="/editTaskScripts.js"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/csc3221.css" />
+  <title>Todo List</title>
+</head>
+
+<body>
+  <div class="page-area">
+    <h1>Todo List</h1>
+    <form>
+      <h3>Edit Task</h3>
+      <table>
+        <tr>
+          <th><label>Name</label></th>
+          <td><input type="text" placeholder="Input Name" name="Name" id="name" autocomplete="false" /></td>
+        </tr>
+        <tr>
+          <td>
+            <label for="status">Choose a Status:</label>
+          </td>
+          <td>
+            <select name="status" id="completed">
+              <option value="true">Active</option>
+              <option value="false">Inactive</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><button type="submit" class="edit-btn">Edit</button></td>
+          </th>
+        </tr>
+      </table>
+    </form>
+  </div>
+  <script src="/corehttp.js"></script>
+  <script src="/editTaskScripts.js"></script>
+</body>
+
 </html>
 <script>
   const http = new coreHTTP();

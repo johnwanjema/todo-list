@@ -12,24 +12,35 @@
       <h1>Todo List</h1>
       <form>
         <h3>Add Task</h3>
-        <section>
-          <label>Name</label>
+        <table>
+          <tr>
+          <th>
+          <label>Name</label></th>
+          <td>
           <input
             type="text"
             placeholder="Input Name"
             name="Name"
             id="name"
             autocomplete="false"
-          />
-        </section>
-        <section>
+          /></td></tr>
+        <tr>
+          <th>
           <label for="status">Choose a Status:</label>
+        </th>
+        <td>
           <select name="status" id="completed">
             <option value="true">Active</option>
             <option value="false">Inactive</option>
           </select>
-        </section>
-        <button type="submit" class="add-btn">Add</button>
+        </td>
+        <tr>
+          <td></td>
+          <td><button type="submit" class="add-btn">Add</button></td>
+          </th>
+        </tr>
+      </tr>
+      </table>
       </form>
     </div>
     <script src="corehttp.js"></script>
