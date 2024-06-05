@@ -1,36 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="csc3221.css">
-  <title>Todo List</title>
-</head>
-<body>
-  <div class="page-area">
-    <h1>Todo List</h1>
-    <form>
-      <h3>Add Task</h3>
-      <section>
-        <label>Name</label>
-        <input type="text" placeholder="Input Name"
-        name="Name"
-        id="name"
-        autocomplete="false"
-        />
-    </section>
-    <section>
-      <label for="status">Choose a Status:</label>
-        <select name="status" id="taskStatus">
-          <option value="true">Active</option>
-          <option value="false">Inactive</option>
-        </select>
-    </section>
-    <button type="submit" class="add-btn">Add</button>
-    </form>
-  </div>
-  <script src="corehttp.js"></script>
-  <script src="addTaskScripts.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/csc3221.css" />
+    <title>Todo List</title>
+  </head>
+  <body>
+    <div class="page-area">
+      <h1>Todo List</h1>
+      <form>
+        <h3>Add Task</h3>
+        <section>
+          <label>Name</label>
+          <input
+            type="text"
+            placeholder="Input Name"
+            name="Name"
+            id="name"
+            autocomplete="false"
+          />
+        </section>
+        <section>
+          <label for="status">Choose a Status:</label>
+          <select name="status" id="completed">
+            <option value="true">Active</option>
+            <option value="false">Inactive</option>
+          </select>
+        </section>
+        <button type="submit" class="add-btn">Add</button>
+      </form>
+    </div>
+    <script src="corehttp.js"></script>
+    <!-- <script src="addTaskScripts.js"></script> -->
+  </body>
 </html>
+<script>
+  const http = new coreHTTP();
+
+  // setup selectors
+  const addButton = document.querySelector(".add-btn");
+  const taskname = document.querySelector("#name");
+  const completed = document.querySelector("#completed");
+
+
+  // Listeners
+  addButton.addEventListener("click", httpPost);
+
+  /* Listener Functions */
+  async function httpPost(e) {
+    e.preventDefault();
+
+    // Todo : Validation
+    console.log(taskname.value);
+    console.log(completed.value);
+
+    http
+      .post("/api", { name: taskname.value, completed: completed.value })
+      .then((response) => {
+        console.log(response);
+        alert("Task added succesfully");
+        window.location = "/";
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  async function main() {
+    addButton.disabled = true;
+    addButton.addEventListener("click", httpPost);
+    addButton.disabled = false;
+  }
+
+  main();
+</script>
