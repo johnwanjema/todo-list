@@ -1,35 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="/css/csc3221.css" />
-        <title>Todo List</title>
-    </head>
-    <body>
-        <div class="page-area">
-            <h1>Todo List</h1>
-            <section style="display: flex;">
-                <table>
-                    <tr>
-                        <th><h3>My Tasks</h3></th>
-                        <th><a href="/add">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/csc3221.css" />
+    <title>Todo List</title>
+</head>
+
+<body>
+    <div class="page-area">
+        <h1>Todo List</h1>
+        <section style="display: flex;">
+            <table>
+                <tr>
+                    <th>
+                        <h3 style>My Tasks</h3>
+                    </th>
+                    <th><a href="/add">
                             <button>Add new Task</button>
                         </a></th>
-                    </tr>
-                </table>
-            </section>
-            <section>
-                <table class = "result">
-                    <!-- <div class="result"> -->
-                    <!-- </div> -->
-                </table>
-            </section>
-        </div>
-        <script src="corehttp.js"></script>
-        <!-- <script src="scripts.js"></script> -->
-    </body>
+                </tr>
+            </table>
+        </section>
+        <section>
+            <table class="result">
+                <!-- <div class="result"> -->
+                <!-- </div> -->
+            </table>
+        </section>
+    </div>
+    <script src="corehttp.js"></script>
+    <!-- <script src="scripts.js"></script> -->
+</body>
+
 </html>
 <script>
     const http = new coreHTTP();
@@ -49,14 +54,19 @@
     function ShowList() {
         let output = "<ul>";
         theList.forEach((item, index) => {
-            output += 
+            output +=
             `<tr>
-                    <th>${item.name}</th>
-                    <th>${item.completed}
-                    <th><a href="/edit/${item._id}" style="color: white;">
-                        <button class="edit-item-btn small-button"  data-index="${item._id}">Edit</button></a>
-                        <button class="del-item-btn small-button" data-index="${item._id}">Delete</button>
-                    </th>
+                <th>
+                    <div class="task" style= "align-items">
+                        <input type="checkbox" id="taskCheckbox">
+                        <span class="value">${item.name}</span>
+                    </div>
+                </th>
+                <th>${item.completed}</th>
+                <th><a href="/edit/${item._id}" style="color: white;">
+                    <button class="edit-item-btn small-button"  data-index="${item._id}">Edit</button></a>
+                    <button class="del-item-btn small-button" data-index="${item._id}">Delete</button>
+                </th>
             </tr>`;
         });
         output += "</ul>";
