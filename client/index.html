@@ -10,13 +10,22 @@
     <body>
         <div class="page-area">
             <h1>Todo List</h1>
-            <section style="display: flex; align-items: center;">
-                <h3>My Tasks</h3>
-                <a href="/add">
-                    <button>Add new Task</button>
-                </a>
+            <section style="display: flex;">
+                <table>
+                    <tr>
+                        <th><h3>My Tasks</h3></th>
+                        <th><a href="/add">
+                            <button>Add new Task</button>
+                        </a></th>
+                    </tr>
+                </table>
             </section>
-            <div class="result"></div>
+            <section>
+                <table class = "result">
+                    <!-- <div class="result"> -->
+                    <!-- </div> -->
+                </table>
+            </section>
         </div>
         <script src="corehttp.js"></script>
         <!-- <script src="scripts.js"></script> -->
@@ -40,12 +49,15 @@
     function ShowList() {
         let output = "<ul>";
         theList.forEach((item, index) => {
-            output += `<li>${item.name}  ${item.completed} 
-      <a href="/edit/${item._id}" style="color: white;">
-          <button class="edit-item-btn small-button"  data-index="${item._id}">Edit</button>
-      </a>
-      <button class="del-item-btn small-button" data-index="${item._id}">Delete</button>
-    </li>`;
+            output += 
+            `<tr>
+                    <th>${item.name}</th>
+                    <th>${item.completed}
+                    <th><a href="/edit/${item._id}" style="color: white;">
+                        <button class="edit-item-btn small-button"  data-index="${item._id}">Edit</button></a>
+                        <button class="del-item-btn small-button" data-index="${item._id}">Delete</button>
+                    </th>
+            </tr>`;
         });
         output += "</ul>";
         result.innerHTML = output;
