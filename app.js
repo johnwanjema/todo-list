@@ -28,12 +28,10 @@ app.post("/findById", async (req,res) => {
 })
 
 app.delete("/api", async (req,res) => {
-  console.log(req.body.id)
   res.send(await tasks.findByIdAndDelete(req.body.id));
 })
 
 app.post("/update", async (req,res) => {
-  console.log(req.body)
   res.send(await tasks.findByIdAndUpdate(req.body.id,req.body));
 })
 
