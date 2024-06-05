@@ -5,7 +5,7 @@ class coreHTTP {
   async get(url) {
     const requestOptions = {
       method: "GET",
-      headers: {"Content-Type": "application/json"}
+      headers: {"Content-Type": "application/json"},
     };
     const response = await fetch(url, requestOptions);
     if (response.ok) {
@@ -24,6 +24,7 @@ class coreHTTP {
       body: JSON.stringify(requestData)};
     const response = await fetch(url, reqOptions);
     if (response.ok) {
+      console.log(response)
       const responseData = await response.json();
       return responseData;
     } else {

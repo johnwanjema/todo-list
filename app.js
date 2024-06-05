@@ -16,19 +16,15 @@ app.use(express.json());
 
 // Define HTTP routes listenting for requests
 app.get("/api", async (req,res) => {
-  // try {
-  //   const task = await tasks.find(); 
-  //   res.status(200).json({task});
-  // } catch (error) {
-  //   console.log(error)
-  //   res.status(500).json({msg: error});
-  // };
-
   res.send(await tasks.find());
 })
 
 app.post("/api", async (req,res) => {
-  res.send(await tasks.create(req.body));
+    res.send(await tasks.create(req.body));
+})
+
+app.post("/findById", async (req,res) => {
+    res.send(await tasks.findById(req.body.id));
 })
 
 app.delete("/api", async (req,res) => {
@@ -36,9 +32,21 @@ app.delete("/api", async (req,res) => {
   res.send(await tasks.findByIdAndDelete(req.body.id));
 })
 
+app.post("/update", async (req,res) => {
+  console.log(req.body)
+  res.send(await tasks.findByIdAndUpdate(req.body.id,req.body));
+})
+
+// URLS
 app.get("/add", (req, res) => {
   res.sendFile(path.join(__dirname, 'Client', 'addTask.html'));
 });
+
+app.get("/edit/:id", (req, res) => {
+  res.sendFile(path.join(__dirname, 'Client', 'editTask.html'));
+});
+
+
 
 app.get("/tm/tasks", async (req,res)=>{
   try {

@@ -4,10 +4,10 @@ const http = new coreHTTP;
 let theList = [];
 
 // setup selectors
-const result = document.querySelector(".result");
-const input =  document.querySelector("#listitem");
 const addButton =  document.querySelector(".add-btn");
-const editButton =  document.querySelector(".edit-btn");
+const taskname =  document.querySelector("#name");
+const taskStatus =  document.querySelector("#taskStatus");
+
 // const delButton =  document.querySelector(".del-btn");
 
 // Listeners
@@ -24,12 +24,8 @@ function capitalizeFirstLetter(string) {
 function ShowList() {
   let output = "<ul>";
   theList.forEach((item, index) => {
-    output += `<li>${item.name}  ${item.completed} 
-      <a href="/edit/${item._id}" style="color: white;">
-          <button class="edit-item-btn small-button"  data-index="${item._id}">Edit</button>
-      </a>
-      <button class="del-item-btn small-button" data-index="${item._id}">Delete</button>
-    </li>`;
+    const capitalizedItem = capitalizeFirstLetter(item);
+    output += `<li>${capitalizedItem} <button class="del-item-btn small-button" data-index="${index}">Delete</button></li>`;
   });
   output += "</ul>";
   result.innerHTML = output;
@@ -44,7 +40,6 @@ function ShowList() {
 async function GetList() {
     http.get('/api')
     .then( (response)=> {
-      console.log(response);
       theList = response;
       ShowList();
     })
@@ -65,20 +60,24 @@ async function WriteList() {
 
 /* Listener Functions */
 async function httpPost(e) {
-  showLoading();
+
   e.preventDefault();
   
-  // Validation for blank input
-  if (!input.value.trim()) {
-    alert("Input cannot be blank!");
-    ShowList();
-    return;
-  }
+  // Todo : Validation 
+  console.log(taskname.value);
+  console.log(taskStatus.value);
+  // send to Mongo DB
 
-  theList.push(input.value);
-  WriteList();
-  ShowList();
-  input.value = "";
+  http.post('/api',{name:taskname.value,completed:taskStatus.value})
+  .then( (response)=> {
+    console.log(response);
+    alert('Task added succesfully');
+    window.location = "/"
+  })
+  .catch((error) => {
+    console.log(error)
+  });
+
 }
 
 function httpDelete(e) {
@@ -88,24 +87,17 @@ function httpDelete(e) {
 
   // Confirmation for delete
   if (!confirm("Are you sure you want to delete this item?")) {
-    ShowList();
     return; // Exit if user cancels the delete action
   }
 
+  if(index != -1){
+      theList.splice(index,1)
+  }else{
+    alert('element not found')
+  }
+  WriteList();
   ShowList();
-
-  console.log(index);
-
-  http.delete('/api',{id :index})
-  .then( (response)=> {
-    alert('Task Deleted Sucessfully');
-    GetList();
-  })
-  .catch((error) => {
-    console.log(error)
-  });
-
-  ShowList();
+  input.value = ""
 }
 
 // Loading functions
@@ -118,13 +110,9 @@ async function main() {
   addButton.disabled = true;
     addButton.addEventListener("click", httpPost);
   }
-  // delButton.disabled = true;
-  showLoading();
 
-  await GetList();
 
-  // addButton.disabled = false;
-  // delButton.disabled = false;
+  addButton.disabled = false;
 }
 
 main();
