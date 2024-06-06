@@ -46,9 +46,6 @@
 <script>
   const http = new coreHTTP();
 
-  // Block Variables
-  let theList = [];
-
   // setup selectors
   const editButton = document.querySelector(".edit-btn");
   const taskname = document.querySelector("#name");
@@ -77,8 +74,20 @@
     e.preventDefault();
 
     // Todo : Validation
-    // console.log(taskname.value);
-    // console.log(completed.value);
+        // Get the values from the input fields
+        const taskNameValue = taskname.value.trim();
+        const completedValue = completed.value.trim();
+
+        //Validation
+        if (!taskNameValue) {
+        alert("Task name cannot be empty");
+        return;
+      }
+
+      if (completedValue !== "true" && completedValue !== "false") {
+        alert("Completed must be either 'true' or 'false'");
+        return;
+      }
     // send to Mongo DB
 
     http
