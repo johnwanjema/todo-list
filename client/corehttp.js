@@ -24,7 +24,6 @@ class coreHTTP {
       body: JSON.stringify(requestData)};
     const response = await fetch(url, reqOptions);
     if (response.ok) {
-      console.log(response)
       const responseData = await response.json();
       return responseData;
     } else {

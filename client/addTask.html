@@ -9,7 +9,7 @@
   </head>
   <body>
     <div class="page-area">
-      <h1>Todo List</h1>
+      <a href="/"><h1>Todo List</h1></a>
       <form>
         <h3>Add Task</h3>
         <table>
@@ -26,12 +26,12 @@
           /></td></tr>
         <tr>
           <th>
-          <label for="status">Choose a Status:</label>
+          <label for="completed">Choose a Status:</label>
         </th>
         <td>
-          <select name="status" id="completed">
-            <option value="true">Active</option>
-            <option value="false">Inactive</option>
+          <select name="completed" id="completed">
+            <option value="true">Completed</option>
+            <option value="false">Incomplete</option>
           </select>
         </td>
         <tr>
@@ -64,13 +64,12 @@
     e.preventDefault();
 
     // Todo : Validation
-    console.log(taskname.value);
-    console.log(completed.value);
+    // console.log(taskname.value);
+    // console.log(completed.value);
 
     http
       .post("/api", { name: taskname.value, completed: completed.value })
       .then((response) => {
-        console.log(response);
         alert("Task added succesfully");
         window.location = "/";
       })
