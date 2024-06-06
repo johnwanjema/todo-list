@@ -54,15 +54,14 @@
     function ShowList() {
         let output = "<ul>";
         theList.forEach((item, index) => {
+            const completedClass = item.completed ? 'completed' : '';
             output +=
             `<tr>
                 <th>
-                    <div class="task" style= "align-items">
-                        <input type="checkbox" id="taskCheckbox">
-                        <span class="value">${item.name}</span>
+                    <div class="task ${completedClass}" style= "align-items">
+                    <span class="value">${item.name}</span>
                     </div>
                 </th>
-                <th>${item.completed}</th>
                 <th><a href="/edit/${item._id}" style="color: white;">
                     <button class="edit-item-btn small-button"  data-index="${item._id}">Edit</button></a>
                     <button class="del-item-btn small-button" data-index="${item._id}">Delete</button>

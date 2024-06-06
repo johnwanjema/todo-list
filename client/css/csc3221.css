@@ -83,7 +83,11 @@ table {
   border-color: gray;
 }
 
-input[type="checkbox"]:checked ~ .value {
+/* input[type="checkbox"]:checked ~ .value {
+  text-decoration: line-through;
+} */
+
+.completed {
   text-decoration: line-through;
 }
 
