@@ -1,48 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/csc3221.css" />
+    <title>Todo List</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="/css/csc3221.css" />
-  <title>Todo List</title>
-</head>
-
-<body>
-  <div class="page-area">
-  <a href="/"><h1>Todo List</h1></a>
-    <form>
-      <h3>Edit Task</h3>
-      <table>
-        <tr>
-          <th><label>Name</label></th>
-          <td><input type="text" placeholder="Input Name" name="Name" id="name" autocomplete="false" /></td>
-        </tr>
-        <tr>
-          <td>
-            <label for="completed">Choose a Status:</label>
-          </td>
-          <td>
-            <select name="completed" id="completed">
-              <option value="true">Completed</option>
-              <option value="false">Incomplete</option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td></td>
-          <td><button type="submit" class="edit-btn">Edit</button></td>
-          </th>
-        </tr>
-      </table>
-    </form>
-  </div>
-  <script src="/corehttp.js"></script>
-  <!-- <script src="/editTaskScripts.js"></script> -->
-</body>
-
+  <body>
+    <div class="page-area">
+    <a href="/"><h1>Todo List</h1></a>
+      <form>
+        <h3>Edit Task</h3>
+        <table>
+          <tr>
+            <th><label>Name</label></th>
+            <td><input type="text" placeholder="Input Name" name="Name" id="name" autocomplete="false" /></td>
+          </tr>
+          <tr>
+            <td>
+              <label for="completed">Choose a Status:</label>
+            </td>
+            <td>
+              <select name="completed" id="completed">
+                <option value="true">Completed</option>
+                <option value="false">Incomplete</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><button type="submit" class="edit-btn">Edit</button></td>
+            </th>
+          </tr>
+        </table>
+      </form>
+    </div>
+    <script src="/corehttp.js"></script>
+  </body>
 </html>
+
 <script>
   const http = new coreHTTP();
 
@@ -73,23 +71,22 @@
   async function httpPost(e) {
     e.preventDefault();
 
-    // Todo : Validation
-        // Get the values from the input fields
-        const taskNameValue = taskname.value.trim();
-        const completedValue = completed.value.trim();
+      // Get the values from the input fields
+      const taskNameValue = taskname.value.trim();
+      const completedValue = completed.value.trim();
 
-        //Validation
-        if (!taskNameValue) {
-        alert("Task name cannot be empty");
-        return;
-      }
+      //Validation
+      if (!taskNameValue) {
+      alert("Task name cannot be empty");
+      return;
+    }
 
-      if (completedValue !== "true" && completedValue !== "false") {
-        alert("Completed must be either 'true' or 'false'");
-        return;
-      }
+    if (completedValue !== "true" && completedValue !== "false") {
+      alert("Completed must be either 'true' or 'false'");
+      return;
+    }
+    
     // send to Mongo DB
-
     http
       .post("/update", {
         id: id,

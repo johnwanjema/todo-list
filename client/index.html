@@ -1,41 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/css/csc3221.css" />
+        <title>Todo List</title>
+    </head>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/csc3221.css" />
-    <title>Todo List</title>
-</head>
+    <body>
+        <div class="page-area">
+            <h1>Todo List</h1>
 
-<body>
-    <div class="page-area">
-        <h1>Todo List</h1>
-        <section style="display: flex;">
-            <table>
-                <tr>
-                    <th>
-                        <h3 style>My Tasks</h3>
-                    </th>
-                    <th><a href="/add">
-                            <button>Add new Task</button>
-                        </a></th>
-                </tr>
-            </table>
-        </section>
-        <section>
-            <table class="result">
-                <!-- <div class="result"> -->
-                <!-- </div> -->
-            </table>
-        </section>
-    </div>
-    <script src="corehttp.js"></script>
-    <!-- <script src="scripts.js"></script> -->
-</body>
+            <section style="display: flex;">
+                <table>
+                    <tr>
+                        <th><h3 style>My Tasks</h3></th>
+                        <th><a href="/add"><button>Add new Task</button></a></th>
+                    </tr>
+                </table>
+            </section>
+            
+            <section>
+                <table class="result"></table>
+            </section>
+        </div>
+        <script src="corehttp.js"></script>
+    </body>
 
 </html>
+
 <script>
     const http = new coreHTTP();
 
@@ -54,7 +48,9 @@
     function ShowList() {
         let output = "<ul>";
         theList.forEach((item, index) => {
+
             const completedClass = item.completed ? 'completed' : '';
+
             output +=
             `<tr>
                 <th>
@@ -68,6 +64,7 @@
                 </th>
             </tr>`;
         });
+
         output += "</ul>";
         result.innerHTML = output;
 
